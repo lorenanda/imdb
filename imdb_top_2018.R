@@ -5,7 +5,7 @@ url = "https://www.imdb.com/search/title?year=2018"
 imdb = read_html(url)
 head(imdb)
 
-rank_data_html = html_nodes(imdb, '.text-primary')
+rank_data_html = html_nodes(imdb, '.lister-item-index unbold text-primary')
 class(rank_data_html)
 
 rank_data = html_text(rank_data_html)
@@ -48,4 +48,19 @@ head(genre_data)
 #create a dataframe with the movies info
 imdb_df = data.frame(Rank=rank_data, Title=title_data, Genre=genre_data, Runtime=runtime_data)
 
+#plot the number of movies by genre
 barplot(table(imdb_df$Genre))
+
+#plot the movies by runtime
+barplot(table(imdb_df$Runtime))
+hist(imdb_df$Runtime)
+
+#group movies by genre
+library(dplyr)
+genre_cat <- group_by(imdb_df, Genre)
+genre_runtime <- summarize(genre_cat, avg_min=mean(Runtime))
+plot(genre_runtime)
+
+counts <- table(genre_runtime$Genre, genre_runtime$avg_min)
+library(ggplot2)
+ggplot(data=genre_runtime, aes(x=Genre, y=avg_min)) + geom_bar(stat = "identity")
