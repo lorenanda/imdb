@@ -7,5 +7,5 @@ In this project, I used R to scrape the most popular movies in 2018 from the IMD
 - Data visualization: ggplot, Tableau
 
 ## Files
-- Web-scraping and data analysis with R
-- Dashboard in Tableau
+- [Web-scraping and data analysis with R](https://github.com/lorenanda/imdb/blob/master/imdb_top_2018.R)
+- [Dashboard in Tableau](https://github.com/lorenanda/imdb/blob/master/imdb_watchlist.twb)
